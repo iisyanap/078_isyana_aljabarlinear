@@ -1,21 +1,17 @@
-// inversGaussJordan.cpp
 #include<iostream>
 #include<iomanip>
 #include<cmath>
 #include<stdlib.h>
 
-#define SIZE 10      // Ukuran untuk invers matriks
+#define SIZE 10     
 
 using namespace std;
 
-/* Fungsi untuk menghitung invers matriks dengan eliminasi Gauss-Jordan */
 void inversGaussJordan()
 {
     float a[SIZE][2*SIZE];
     int i,j,k,n;
 
-    /* Input */
-    /* 1. Membaca ordo matriks */
     cout<<"============Invers Metode Gauss Jordan============\n";
     cout<<"Masukkan ordo matriks (maksimum "<< SIZE << "): ";
     cin>>n;
@@ -26,7 +22,6 @@ void inversGaussJordan()
         return;
     }
 
-    /* 2. Membaca elemen Matriks */
     cout<<"Masukkan elemen matriks: " << endl;
     for(i=1;i<=n;i++)
     {
@@ -37,7 +32,6 @@ void inversGaussJordan()
         }
     }
 
-    /* Menambahkan Matriks Identitas */
     for(i=1;i<=n;i++)
     {
         for(j=n+1;j<=2*n;j++)
@@ -53,7 +47,6 @@ void inversGaussJordan()
         }
     }
 
-    /* Menampilkan Matriks Augmented */
     cout << "\nMatriks Augmented Awal:\n";
     for(i=1;i<=n;i++)
     {
@@ -66,7 +59,6 @@ void inversGaussJordan()
         cout << endl;
     }
 
-    /* Menerapkan Eliminasi Gauss-Jordan */
     for(i=1;i<=n;i++)
     {
         if(a[i][i] == 0.0)
@@ -85,7 +77,6 @@ void inversGaussJordan()
                 {
                     a[j][k] = a[j][k] - rasio*a[i][k];
                 }
-                /* Menampilkan Matriks Augmented setelah setiap operasi baris */
                 cout << "\nMatriks Setelah Operasi:\n";
                 for(int p=1;p<=n;p++)
                 {
@@ -100,7 +91,6 @@ void inversGaussJordan()
             }
         }
     }
-    /* Operasi Baris untuk Membuat Elemen Diagonal Utama Menjadi 1 */
     cout << "\nMengubah elemen diagonal utama menjadi 1:";
     for(i=1;i<=n;i++)
     {
@@ -110,7 +100,6 @@ void inversGaussJordan()
         {
             a[i][j] = a[i][j]/diagonal;
         }
-        /* Menampilkan Matriks Augmented setelah normalisasi diagonal */
         cout << "\nMatriks Setelah Normalisasi:\n";
         for(int p=1;p<=n;p++)
         {
@@ -123,7 +112,6 @@ void inversGaussJordan()
             cout << endl;
         }
     }
-    /* Menampilkan Matriks Invers */
     cout<< endl<<"Matriks Invers adalah:"<< endl;
     for(i=1;i<=n;i++)
     {

@@ -1,9 +1,7 @@
-// main.cpp
 #include<iostream>
 
 using namespace std;
 
-/* Deklarasi fungsi */
 void eliminasiGaussJordan();
 void inversGaussJordan();
 

@@ -1,23 +1,19 @@
-// eliminasiGaussJordan.cpp
 #include<iostream>
 #include<iomanip>
 #include<vector>
 #include<algorithm>
 #include<cmath>
 
-#define MAX_SIZE 20  // Maksimum ukuran matriks
+#define MAX_SIZE 20  
 
 using namespace std;
 
-/* Fungsi untuk menyelesaikan sistem persamaan linear dengan eliminasi Gauss-Jordan */
 void eliminasiGaussJordan()
 {
     double a[MAX_SIZE][MAX_SIZE];
     int i,j,k,n,m;
-    const double epsilon = 1e-9; // Toleransi untuk menganggap angka sebagai nol
+    const double epsilon = 1e-9; 
 
-    /* Input */
-    /* 1. Membaca jumlah baris dan kolom */
     cout<<"=====Eliminasi Gauss Jordan====\n";
     cout<<"Masukkan jumlah baris (n): ";
     cin>>n;
@@ -30,7 +26,6 @@ void eliminasiGaussJordan()
         return;
     }
 
-    /* 2. Membaca elemen matriks augmented */
     cout<<"Masukkan elemen matriks augmented (termasuk konstanta):\n";
     for(i=0;i<n;i++)
     {
@@ -41,7 +36,6 @@ void eliminasiGaussJordan()
         }
     }
 
-    /* Menampilkan Matriks Awal */
     cout << "\nMatriks Augmented Awal:\n";
     for(i=0;i<n;i++)
     {
@@ -52,11 +46,9 @@ void eliminasiGaussJordan()
         cout << endl;
     }
 
-    /* Menerapkan Eliminasi Gauss-Jordan */
-    vector<pair<int,int>> pivot_columns; // pasangan (pivot_col, row_index)
+    vector<pair<int,int>> pivot_columns; 
     for(i=0, j=0; i<n && j<m-1; j++)
     {
-        // Mencari pivot
         int maxRow = i;
         for(k=i+1;k<n;k++)
         {
@@ -67,7 +59,6 @@ void eliminasiGaussJordan()
         }
         if(abs(a[maxRow][j]) > epsilon)
         {
-            // Tukar baris i dengan baris maxRow
             if(i != maxRow)
             {
                 for(int l=0; l<m; l++)
@@ -75,14 +66,12 @@ void eliminasiGaussJordan()
                     swap(a[i][l], a[maxRow][l]);
                 }
             }
-            // Normalisasi baris pivot
             double pivot = a[i][j];
             for(int l=0;l<m;l++)
             {
                 a[i][l] = a[i][l] / pivot;
             }
 
-            // Eliminasi elemen di atas dan di bawah pivot
             for(k=0;k<n;k++)
             {
                 if(k != i)
@@ -95,7 +84,6 @@ void eliminasiGaussJordan()
                 }
             }
 
-            // Mengatur nilai yang sangat kecil menjadi nol
             for(int p=0;p<n;p++)
             {
                 for(int q=0;q<m;q++)
@@ -108,7 +96,6 @@ void eliminasiGaussJordan()
             pivot_columns.push_back(make_pair(j,i));
             i++;
 
-            /* Menampilkan Matriks setelah setiap operasi */
             cout << "\nMatriks Setelah Operasi pada kolom " << j+1 << ":\n";
             for(int p=0;p<n;p++)
             {
@@ -121,7 +108,6 @@ void eliminasiGaussJordan()
         }
     }
 
-    /* Mengecek Konsistensi Sistem */
     bool inconsistent = false;
     for(i=0;i<n;i++)
     {
@@ -136,7 +122,7 @@ void eliminasiGaussJordan()
         }
         if(all_zero && abs(a[i][m-1]) > epsilon)
         {
-            inconsistent = true; // Sistem tidak konsisten
+            inconsistent = true; 
             break;
         }
     }
@@ -147,7 +133,6 @@ void eliminasiGaussJordan()
     }
     else
     {
-        /* Menentukan Variabel Dasar dan Variabel Bebas */
         vector<int> basic_variables;
         vector<int> free_variables;
         vector<bool> is_basic(m-1, false);
@@ -164,12 +149,10 @@ void eliminasiGaussJordan()
                 free_variables.push_back(j);
         }
 
-        /* Menampilkan Solusi Parametrik */
         cout<< endl<<"Solusi Sistem Persamaan adalah:\n";
         for(auto var : basic_variables)
         {
             int row = -1;
-            // Cari baris yang memiliki pivot pada kolom var
             for(auto pivot : pivot_columns)
             {
                 if(pivot.first == var)
@@ -192,7 +175,6 @@ void eliminasiGaussJordan()
                 first = false;
             }
 
-            // Variabel Bebas
             for(auto free_var : free_variables)
             {
                 double coeff = -a[row][free_var];

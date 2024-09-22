@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "c:/Users/HP/OneDrive - Politeknik Negeri Bandung/SEMESTER_3_2C_JTK/ALJABAR LINEAR/GAUSS JORDAN GABUNGAN",
+      "program": "c:/Users/HP/OneDrive - Politeknik Negeri Bandung/SEMESTER_3_2C_JTK/ALJABAR LINEAR/GAUSS JORDAN GABUNGAN/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}
